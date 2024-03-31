@@ -38,7 +38,7 @@ export const sendEmail = async ({ email, emailType, userId }: EmailProps) => {
         //     },
         // });
 
-        const registerEmail = render(<RegisterEmail username={email} type={emailType} VerifyLink={`${process.env.NEXT_PUBLIC_DOMAIN}/${emailType == "VERIFY_USER" ? "verifyToken" : "verifyResetPassword"}?token=${cleanedHashedToken}`} />);
+        const registerEmail = render(<RegisterEmail username={email} type={emailType} VerifyLink={`${process.env.NEXT_PUBLIC_DOMAIN}/${emailType == "VERIFY_USER" ? "verify-register" : "verify-forgot-password"}?token=${cleanedHashedToken}`} />);
         const mailOptions = {
             from: `${process.env.NEXT_PUBLIC_EMAIL!}`,
             to: email,

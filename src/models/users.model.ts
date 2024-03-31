@@ -7,6 +7,13 @@ const wasteDumped = new mongoose.Schema({
     wasteType: {
         type: String,
     },
+    wastePoints: {
+        type: Number,
+        default: 0,
+    },
+    material: {
+        type: String,
+    },
     day: {
         type: Date,
         default: Date.now,
