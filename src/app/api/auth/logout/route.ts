@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
+import { HTTP_STATUS } from "@/enums/enums";
 import { Error } from "@/types/ErrorTypes";
 
 export function GET() {
@@ -26,7 +27,7 @@ export function GET() {
             return NextResponse.json(
                 { message: "Logout Successful", success: true },
                 {
-                    status: 200,
+                    status: HTTP_STATUS.OK,
                 },
             );
         }

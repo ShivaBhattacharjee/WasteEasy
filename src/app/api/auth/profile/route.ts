@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
 
 import { connect } from "@/database/db";
+import { HTTP_STATUS } from "@/enums/enums";
 import { getDataFromJwt } from "@/helpers/jwtData";
 import User from "@/models/users.model";
 import { Error } from "@/types/ErrorTypes";
@@ -26,7 +27,7 @@ export async function GET(request: NextRequest) {
                     error: "Invalid userId format",
                 },
                 {
-                    status: 400,
+                    status: HTTP_STATUS.BAD_REQUEST,
                 },
             );
         }
@@ -39,7 +40,7 @@ export async function GET(request: NextRequest) {
                     message: "User not found",
                 },
                 {
-                    status: 404,
+                    status: HTTP_STATUS.NOT_FOUND,
                 },
             );
         }
@@ -54,7 +55,7 @@ export async function GET(request: NextRequest) {
                 error: err.message,
             },
             {
-                status: 400,
+                status: HTTP_STATUS.INTERNAL_SERVER_ERROR,
             },
         );
     }
@@ -72,7 +73,7 @@ export async function PUT(request: NextRequest) {
                     error: "User not found",
                 },
                 {
-                    status: 400,
+                    status: HTTP_STATUS.NOT_FOUND,
                 },
             );
         }
@@ -92,7 +93,7 @@ export async function PUT(request: NextRequest) {
                 userData: user,
             },
             {
-                status: 200,
+                status: HTTP_STATUS.OK,
             },
         );
     } catch (error: unknown) {
@@ -102,7 +103,7 @@ export async function PUT(request: NextRequest) {
                 error: Error.message,
             },
             {
-                status: 400,
+                status: HTTP_STATUS.INTERNAL_SERVER_ERROR,
             },
         );
     }
