@@ -33,7 +33,7 @@ const Page = () => {
                 token: token,
                 password: password,
             };
-            const response = await axios.post("/api/auth/verifyForgotPassword", userData);
+            const response = await axios.post("/api/auth/verify-forgot-password", userData);
             Toast.SuccessshowToast(response.data.message || "Reset Successfull");
             router.push("/login");
         } catch (error: unknown) {

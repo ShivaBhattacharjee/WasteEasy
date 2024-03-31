@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { ClockLoader } from "react-spinners";
 import axios from "axios";
-import { ArrowLeft, Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -42,16 +42,12 @@ const Page = () => {
 
     return (
         <>
-            <Link href={"/"} className=" font-bold text-lg p-4 flex items-center gap-2">
-                <ArrowLeft />
-                <h1>Back</h1>
-            </Link>
             <section className="flex min-h-[88vh] justify-center items-center">
                 <div className=" border-black/10 border-2  shadow-lg shadow-black/10   w-full md:w-1/2 2xl:w-1/3 m-4 md:m-auto p-4 rounded-lg">
                     <h1 className="font-semibold text-2xl text-center mb-5">Welcome Back</h1>
                     <form autoComplete="false" className="flex flex-col gap-2" onSubmit={handleLogin}>
                         <label htmlFor="Email">Email</label>
-                        <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} className=" bg-transparent fill-none border-2  border-black/20 text-black p-2 focus:outline-none  rounded-lg  " autoComplete="off" />
+                        <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} className=" bg-transparent fill-none border-2  border-black/20 duration-200 focus:border-green-700 text-black p-2 focus:outline-none  rounded-lg  " autoComplete="off" />
                         <label htmlFor="Password">Password</label>
                         <div className="flex justify-between fill-none items-center border-2 rounded-lg border-black/20 p-2 ">
                             <input type={`${showPassword ? "text" : "password"}`} placeholder="Password" className=" w-[90%] bg-transparent focus:outline-none" onChange={(e) => setPassword(e.target.value)} />
@@ -64,12 +60,12 @@ const Page = () => {
                             </Link>
                         </div>
                         {loading ? (
-                            <button className=" font-semibold flex gap-3 p-3  bg-white text-black rounded-lg items-center justify-center" disabled={true}>
-                                <ClockLoader size={30} />
+                            <button className=" font-semibold flex gap-3 p-3  bg-green-600 text-white rounded-lg items-center justify-center" disabled={true}>
+                                <ClockLoader size={26} color="#fff" />
                                 <span>Onboarding...</span>
                             </button>
                         ) : (
-                            <button className={` p-3 ${email && password != "" ? "bg-green-600 text-white cursor-pointer" : "bg-black/30 text-white  cursor-not-allowed"} rounded-lg mt-3 font-semibold duration-200 ${email && password != "" && "hover:bg-white"} hover:text-black`} disabled={email && password != "" ? false : true}>
+                            <button className={` p-3 ${email && password != "" ? "bg-green-600 text-white cursor-pointer" : "bg-black/30 text-white  cursor-not-allowed"} rounded-lg mt-3 font-semibold duration-200"} `} disabled={email && password != "" ? false : true}>
                                 Login
                             </button>
                         )}

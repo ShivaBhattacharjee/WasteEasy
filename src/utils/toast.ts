@@ -6,8 +6,8 @@ const Toast = {
             style: {
                 border: "1px solid #28a745",
                 padding: "16px",
-                color: "#fff",
-                backgroundColor: "#000",
+                color: "#000",
+                backgroundColor: "trnasparent",
             },
             iconTheme: {
                 primary: "#000",
@@ -21,11 +21,11 @@ const Toast = {
             style: {
                 border: "1px solid #FF0000",
                 padding: "16px",
-                color: "#fff",
-                backgroundColor: "#000",
+                color: "red",
+                backgroundColor: "trnasparent",
             },
             iconTheme: {
-                primary: "#000",
+                primary: "black",
                 secondary: "#FF0000",
             },
         });

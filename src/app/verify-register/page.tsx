@@ -41,7 +41,7 @@ export default function VerifyEmailPage() {
     }, [token]);
 
     return (
-        <div className="flex justify-center items-center  flex-col min-h-[70vh] p-3 gap-5">
+        <div className="flex justify-center items-center  flex-col min-h-[90vh] p-3 gap-5">
             {loading ? (
                 <div className="flex min-h-[70vh] flex-col justify-center items-center">
                     <SpinLoading />
@@ -54,7 +54,7 @@ export default function VerifyEmailPage() {
                         <>
                             <Confetti width={globalThis.innerWidth > 600 ? 800 : globalThis.innerWidth} className=" lg:m-auto" />
                             <h2 className=" text-2xl font-semibold text-green-500">{message}</h2>
-                            <Link href={"/login"} className=" bg-white p-3 rounded-lg text-black font-semibold w-52 text-center">
+                            <Link href={"/login"} className=" bg-green-600 text-white p-3 rounded-lg  font-semibold w-52 text-center">
                                 Login
                             </Link>
                         </>

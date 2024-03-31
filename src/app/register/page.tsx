@@ -51,7 +51,7 @@ const Page = () => {
                 password: password,
                 phoneNumber: phoneNumber,
             };
-            const res = await axios.post("/api/register", UserData);
+            const res = await axios.post("/api/auth/register", UserData);
             if (res) {
                 Toast.SuccessshowToast(`Email sent to ${email} please verify` || "Something went wrong");
             } else {
@@ -75,7 +75,7 @@ const Page = () => {
             </Link>
             <section className="flex min-h-[90vh] justify-center items-center ">
                 <div className=" border-2 border-black/10 shadow-md shadow-black/10 w-full md:w-1/2 2xl:w-1/3 m-4 md:m-auto p-4 rounded-lg">
-                    <h1 className="font-semibold text-2xl text-center mb-5">Onboarding</h1>
+                    <h1 className="font-semibold text-2xl text-left mb-5">Create Your Account</h1>
                     <form autoComplete="false" className="flex flex-col gap-2" onSubmit={handleRegister}>
                         <label htmlFor="text">Username</label>
                         <input type="text" placeholder="Username" className=" bg-transparent border-2 border-back/20 p-2 focus:outline-none focus:border-green-800 duration-200  rounded-lg text-black" onChange={(e) => setUserName(e.target.value)} />
@@ -102,9 +102,7 @@ const Page = () => {
                                 <span>Registering...</span>
                             </button>
                         ) : (
-                            <button className={` p-3 ${userName && email && phoneNumber && password && confirmPassword != "" && password === confirmPassword ? "bg-green-600 text-white cursor-pointer" : "bg-black/30 text-white cursor-not-allowed"} rounded-lg mt-3 font-semibold duration-200 ${userName && email && password && confirmPassword != "" && password && confirmPassword.length > 8 && password && "hover:bg-white"} hover:text-black`} disabled={userName && email && password && confirmPassword != "" && password && confirmPassword.length > 8 && password ? false : true}>
-                                Register
-                            </button>
+                            <button className={` p-3 ${userName && email && password && confirmPassword != "" && password === confirmPassword ? "bg-green-600 text-white cursor-pointer" : "bg-black/30 text-white cursor-not-allowed"} rounded-lg mt-3 font-semibold duration-200 ${userName && email && password && confirmPassword != "" && password && confirmPassword.length > 8 && password && "hover:bg-white"} hover:text-white`}>Register</button>
                         )}
 
                         <span className=" text-center mt-2">
