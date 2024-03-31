@@ -29,7 +29,12 @@ export async function POST(request: NextRequest) {
         if (state.length === 0) {
             return NextResponse.json({ error: "Please provide a valid state", success: false }, { status: HTTP_STATUS.BAD_REQUEST });
         }
-
+        if (city == "select city") {
+            return NextResponse.json({ error: "Please provide a valid city", success: false }, { status: HTTP_STATUS.BAD_REQUEST });
+        }
+        if (state == "Select State") {
+            return NextResponse.json({ error: "Please provide a valid state", success: false }, { status: HTTP_STATUS.BAD_REQUEST });
+        }
         if (user) {
             return NextResponse.json({ error: "User already exists", success: false }, { status: HTTP_STATUS.BAD_REQUEST });
         }

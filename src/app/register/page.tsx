@@ -106,11 +106,13 @@ const Page = () => {
                         </select>
                         <label htmlFor="text">Enter Your City</label>
                         <select onChange={(e) => setCitySelected(e.target.value)} className=" bg-transparent border-2 border-black/20 p-2 focus:outline-none focus:border-green-800 duration-200  rounded-lg text-black">
-                            {cities.map((city, index) => (
-                                <option value={city} key={index}>
-                                    {city}
-                                </option>
-                            ))}
+                            {cities.map((city, index) => {
+                                return (
+                                    <option value={city} key={index}>
+                                        {city}
+                                    </option>
+                                );
+                            })}
                         </select>
                         <label htmlFor="Password">Password</label>
                         <div className={`flex justify-between items-center border-2 text-black rounded-lg  ${passwordMismatch ? "border-red-500" : "border-black/20"} p-2 `}>
@@ -130,7 +132,7 @@ const Page = () => {
                                 <span>Registering...</span>
                             </button>
                         ) : (
-                            <button className={` p-3 ${userName && email && password && confirmPassword != "" && password === confirmPassword ? "bg-green-600 text-white cursor-pointer" : "bg-black/30 text-white cursor-not-allowed"} rounded-lg mt-3 font-semibold duration-200 ${userName && email && password && confirmPassword != "" && password && confirmPassword.length > 8 && password && "hover:bg-white"} hover:text-white`}>Register</button>
+                            <button className={` p-3 ${userName && email && password && confirmPassword != "" && password === confirmPassword ? "bg-green-600 text-white cursor-pointer" : "bg-black/30 text-white cursor-not-allowed"} rounded-lg mt-3 font-semibold duration-200 ${userName && email && password && confirmPassword != "" && password && confirmPassword.length > 8 && password && "hover:bg-geen-500"} hover:text-white`}>Register</button>
                         )}
 
                         <span className=" text-center mt-2">
