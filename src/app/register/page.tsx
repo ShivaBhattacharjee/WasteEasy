@@ -16,7 +16,6 @@ const Page = () => {
     const router = useRouter();
     const [userName, setUserName] = useState<string>("");
     const [email, setEmail] = useState<string>("");
-    const [phoneNumber, setPhoneNumber] = useState<string>("");
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
     const [password, setPassword] = useState<string>("");
@@ -53,7 +52,6 @@ const Page = () => {
                 username: userName,
                 email: email,
                 password: password,
-                phoneNumber: phoneNumber,
                 state: selectedState,
                 city: citySelected,
             };
@@ -94,8 +92,6 @@ const Page = () => {
                         <input type="text" placeholder="Username" className=" bg-transparent border-2 border-back/20 p-2 focus:outline-none focus:border-green-800 duration-200  rounded-lg text-black" onChange={(e) => setUserName(e.target.value)} />
                         <label htmlFor="Email">Email</label>
                         <input type="email" placeholder="Email" className=" bg-transparent border-2 border-black/20 p-2 focus:outline-none focus:border-green-800 duration-200  rounded-lg text-black" onChange={(e) => setEmail(e.target.value)} />
-                        <label htmlFor="text">Phone Number</label>
-                        <input type="text" placeholder="Enter Your Phone number" className=" bg-transparent border-2 border-black/20 p-2 focus:outline-none focus:border-green-800 duration-200  rounded-lg text-black" onChange={(e) => setPhoneNumber(e.target.value)} />
                         <label htmlFor="text">Enter Your State</label>
                         <select onChange={handleStateChange} className="bg-transparent border-2 border-black/20 p-2 focus:outline-none focus:border-green-800 duration-200  rounded-lg text-black">
                             {Object.keys(stateandcity).map((state) => (

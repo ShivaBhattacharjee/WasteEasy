@@ -12,16 +12,12 @@ connect();
 export async function POST(request: NextRequest) {
     try {
         const reqBody = await request.json();
-        const { username, email, password, phoneNumber, city, state } = reqBody;
+        const { username, email, password, city, state } = reqBody;
 
         console.log(reqBody);
 
         //check if user already exists
-        const user = await User.findOne({ $or: [{ email }, { username }, { phoneNumber }] });
-
-        if (phoneNumber.length !== 10) {
-            return NextResponse.json({ error: "Please provide a valid phone number", success: false }, { status: HTTP_STATUS.BAD_REQUEST });
-        }
+        const user = await User.findOne({ $or: [{ email }, { username }] });
 
         if (city.length === 0) {
             return NextResponse.json({ error: "Please provide a valid city", success: false }, { status: HTTP_STATUS.BAD_REQUEST });
@@ -46,7 +42,6 @@ export async function POST(request: NextRequest) {
         const newUser = new User({
             username,
             email,
-            phoneNumber,
             state,
             city,
             password: hashedPassword,
