@@ -46,20 +46,20 @@ const Page = () => {
                 <ArrowLeft />
                 <h1>Back</h1>
             </Link>
-            <section className="flex min-h-[60vh] justify-center items-center">
-                <div className=" bg-white/20 shadow-md shadow-white/70 w-full md:w-1/2 2xl:w-1/3 m-4 md:m-auto p-4 rounded-lg">
+            <section className="flex min-h-[88vh] justify-center items-center">
+                <div className=" border-black/10 border-2  shadow-lg shadow-black/10   w-full md:w-1/2 2xl:w-1/3 m-4 md:m-auto p-4 rounded-lg">
                     <h1 className="font-semibold text-2xl text-center mb-5">Welcome Back</h1>
                     <form autoComplete="false" className="flex flex-col gap-2" onSubmit={handleLogin}>
                         <label htmlFor="Email">Email</label>
-                        <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} className=" bg-transparent fill-none border-2  border-white/20 p-2 focus:outline-none  rounded-lg text-white " autoComplete="off" />
+                        <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} className=" bg-transparent fill-none border-2  border-black/20 text-black p-2 focus:outline-none  rounded-lg  " autoComplete="off" />
                         <label htmlFor="Password">Password</label>
-                        <div className="flex justify-between fill-none items-center border-2 rounded-lg border-white/20 p-2 ">
+                        <div className="flex justify-between fill-none items-center border-2 rounded-lg border-black/20 p-2 ">
                             <input type={`${showPassword ? "text" : "password"}`} placeholder="Password" className=" w-[90%] bg-transparent focus:outline-none" onChange={(e) => setPassword(e.target.value)} />
                             {showPassword ? <EyeOff onClick={() => setShowPassword(!showPassword)} /> : <Eye onClick={() => setShowPassword(!showPassword)} />}
                         </div>
                         {password.length < 0 && <span className=" text-red-500">Password should have alteast 8 characters</span>}
                         <div className="flex justify-start mt-3">
-                            <Link href={"/forgot-password"} className=" text-blue-500">
+                            <Link href={"/forgot-password"} className=" text-green-700">
                                 Forgot Password?
                             </Link>
                         </div>
@@ -69,13 +69,13 @@ const Page = () => {
                                 <span>Onboarding...</span>
                             </button>
                         ) : (
-                            <button className={` p-3 ${email && password != "" ? "bg-blue-600 cursor-pointer" : "bg-white/30 text-black  cursor-not-allowed"} rounded-lg mt-3 font-semibold duration-200 ${email && password != "" && "hover:bg-white"} hover:text-black`} disabled={email && password != "" ? false : true}>
+                            <button className={` p-3 ${email && password != "" ? "bg-green-600 text-white cursor-pointer" : "bg-black/30 text-white  cursor-not-allowed"} rounded-lg mt-3 font-semibold duration-200 ${email && password != "" && "hover:bg-white"} hover:text-black`} disabled={email && password != "" ? false : true}>
                                 Login
                             </button>
                         )}
                         <span className=" text-center mt-2">
                             Dont have an account?{" "}
-                            <Link href={"/register"} className=" text-blue-500 ">
+                            <Link href={"/register"} className=" text-green-600 ">
                                 Signup
                             </Link>
                         </span>

@@ -24,6 +24,12 @@ const wasteDumped = new mongoose.Schema({
     location: {
         type: String,
     },
+    latitude: {
+        type: Number,
+    },
+    longitude: {
+        type: Number,
+    },
 });
 const userSchema = new mongoose.Schema({
     username: {
