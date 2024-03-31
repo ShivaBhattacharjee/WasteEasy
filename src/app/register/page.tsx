@@ -74,7 +74,7 @@ const Page = () => {
                 <h1>Back</h1>
             </Link>
             <section className="flex min-h-[90vh] justify-center items-center ">
-                <div className=" border-2 border-black/10 shadow-md shadow-black/10 w-full md:w-1/2 2xl:w-1/3 m-4 md:m-auto p-4 rounded-lg">
+                <div className=" border-2 border-black/10 shadow-md shadow-black/10 w-full m-4 md:m-auto p-4 rounded-lg">
                     <h1 className="font-semibold text-2xl text-left mb-5">Create Your Account</h1>
                     <form autoComplete="false" className="flex flex-col gap-2" onSubmit={handleRegister}>
                         <label htmlFor="text">Username</label>

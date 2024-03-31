@@ -43,7 +43,7 @@ const Page = () => {
     return (
         <>
             <section className="flex min-h-[88vh] justify-center items-center">
-                <div className=" border-black/10 border-2  shadow-lg shadow-black/10   w-full md:w-1/2 2xl:w-1/3 m-4 md:m-auto p-4 rounded-lg">
+                <div className=" border-black/10 border-2  shadow-lg shadow-black/10   w-full  m-4 md:m-auto p-4 rounded-lg">
                     <h1 className="font-semibold text-2xl text-center mb-5">Welcome Back</h1>
                     <form autoComplete="false" className="flex flex-col gap-2" onSubmit={handleLogin}>
                         <label htmlFor="Email">Email</label>
