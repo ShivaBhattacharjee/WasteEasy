@@ -32,7 +32,7 @@ export async function GET(request: NextRequest) {
             );
         }
 
-        const user = await User.findOne({ _id: userId }).select("-password -watchHistory -bookmarks -isAdmin");
+        const user = await User.findOne({ _id: userId }).select("-password");
 
         if (!user) {
             return NextResponse.json(
@@ -65,8 +65,8 @@ export async function PUT(request: NextRequest) {
     try {
         const reqBody = await request.json();
         const userId = getDataFromJwt(request);
-        const { username, profilePicture, userDescription } = reqBody;
-        const user = await User.findOne({ _id: userId }).select("-password -watchHistory -bookmarks -isAdmin");
+        const { username, profilePicture, userDescription, state, city } = reqBody;
+        const user = await User.findOne({ _id: userId }).select("-password");
         if (!user) {
             return NextResponse.json(
                 {
@@ -85,6 +85,12 @@ export async function PUT(request: NextRequest) {
         }
         if (userDescription) {
             user.userDescription = userDescription;
+        }
+        if (state) {
+            user.state = state;
+        }
+        if (city) {
+            user.city = city;
         }
         await user.save();
         return NextResponse.json(

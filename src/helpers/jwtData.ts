@@ -1,11 +1,10 @@
 import jwt from "jsonwebtoken";
 import { NextRequest } from "next/server";
-
 type DecodedToken = {
     id: number;
 };
 
-export const getDataFromJwt = (request: NextRequest): number => {
+export const getDataFromJwt = (request: NextRequest) => {
     try {
         const token = request.cookies.get("token")?.value || "";
         const decodedToken: DecodedToken = jwt.verify(token, process.env.NEXT_PUBLIC_JWT_TOKEN!) as DecodedToken;

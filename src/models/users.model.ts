@@ -67,6 +67,14 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: "Hello there! I'm using AnimeTrix.",
     },
+    city: {
+        type: String,
+        default: "",
+    },
+    state: {
+        type: String,
+        default: "",
+    },
     totalPointsEarned: {
         type: Number,
         default: 0,

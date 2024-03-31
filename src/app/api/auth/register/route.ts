@@ -12,7 +12,7 @@ connect();
 export async function POST(request: NextRequest) {
     try {
         const reqBody = await request.json();
-        const { username, email, password, phoneNumber } = reqBody;
+        const { username, email, password, phoneNumber, city, state } = reqBody;
 
         console.log(reqBody);
 
@@ -21,6 +21,13 @@ export async function POST(request: NextRequest) {
 
         if (phoneNumber.length !== 10) {
             return NextResponse.json({ error: "Please provide a valid phone number", success: false }, { status: HTTP_STATUS.BAD_REQUEST });
+        }
+
+        if (city.length === 0) {
+            return NextResponse.json({ error: "Please provide a valid city", success: false }, { status: HTTP_STATUS.BAD_REQUEST });
+        }
+        if (state.length === 0) {
+            return NextResponse.json({ error: "Please provide a valid state", success: false }, { status: HTTP_STATUS.BAD_REQUEST });
         }
 
         if (user) {
@@ -35,6 +42,8 @@ export async function POST(request: NextRequest) {
             username,
             email,
             phoneNumber,
+            state,
+            city,
             password: hashedPassword,
         });
 
