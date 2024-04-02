@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { MoonLoader } from "react-spinners";
-import { GoogleGenerativeAI, HarmBlockThreshold,HarmCategory } from "@google/generative-ai";
+import { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } from "@google/generative-ai";
 import { Scan, Trash } from "lucide-react";
 import Link from "next/link";
 
@@ -134,7 +134,7 @@ const Page: React.FC = () => {
                                 {aiData.non_recyclable && <h1 className=" text-lg font-bold">Non Recyclable: {aiData.non_recyclable}</h1>}
                                 {aiData.dry_waste && <h1 className=" text-lg font-bold">Dry Waste: {aiData.dry_waste}</h1>}
 
-                                {aiData.wet_waste && <h1 className=" text-lg font-bold">Wet Waste: {aiData.wet_waste}</h1>}
+                                <h1 className=" text-lg font-bold">Wet Waste: {aiData.wet_waste || 0}</h1>
                                 {aiData.material && <h1 className=" text-lg font-bold capitalize">Material: {aiData.material.replace(/_/g, " ")}</h1>}
 
                                 {demo}
