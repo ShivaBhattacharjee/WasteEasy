@@ -11,18 +11,9 @@ const wasteDumped = new mongoose.Schema({
         type: Number,
         default: 0,
     },
-    material: {
-        type: String,
-    },
     day: {
         type: Date,
         default: Date.now,
-    },
-    image: {
-        type: String,
-    },
-    location: {
-        type: String,
     },
     latitude: {
         type: Number,
