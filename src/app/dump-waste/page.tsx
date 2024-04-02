@@ -2,8 +2,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { MoonLoader } from "react-spinners";
 import { GoogleGenerativeAI, HarmBlockThreshold,HarmCategory } from "@google/generative-ai";
-import { Scan, Trash } from "lucide-react";
-import Link from "next/link";
+import { Coins, Scan } from "lucide-react";
+import { useSearchParams } from "next/navigation";
 
 import Toast from "@/utils/toast";
 
@@ -32,7 +32,9 @@ const Page: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const [aiLoading, setaiLoading] = useState(false);
     const [aiData, setAiData] = useState<any | null>(null);
-    const [demo, setDemo] = useState<any | null>(null);
+    const searchParams = useSearchParams();
+    const recycle = searchParams.get("recycle");
+
     const startCamera = async () => {
         try {
             const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
@@ -66,7 +68,7 @@ const Page: React.FC = () => {
             setaiLoading(true);
             const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY!);
             const model = genAI.getGenerativeModel({ model: "gemini-pro-vision", safetySettings: safetySettings });
-            const prompt = "Does this look like a recyclable or non recyclable waste to you? Send the % of probability, only with two decimals. Don't send 'yes' or 'no' text, only %. Send both the % of how much it's recyclable and how much it's  also tell the type of waste. like dry waste, wet waste etc. and detect the type of material used in the waste. send response in a json type without ``` or extra anything `` pure keys and values in json";
+            const prompt = "Does this look like a dustbin to you respond with yes or no";
             const formatMatch = photoData.match(/^data:(image\/(\w+));base64,/);
             if (!formatMatch) {
                 console.error("Unsupported image format");
@@ -82,12 +84,8 @@ const Page: React.FC = () => {
             };
 
             const result = await model.generateContent([prompt, image]);
-            const jsonString = result.response.text().replace(/```json([\s\S]*?)```/, "$1");
-            const parsedJson = JSON.parse(jsonString);
-            setDemo(result.response.text());
-            console.log(parsedJson);
             setaiLoading(false);
-            setAiData(parsedJson);
+            setAiData(result.response.text());
         } catch (err) {
             console.error("Error scanning image:", err);
             alert("Error scanning image" + err);
@@ -108,7 +106,7 @@ const Page: React.FC = () => {
 
     return (
         <div className="flex relative flex-col  mt-4 w-full mb-40">
-            <h1 className=" flex items-start justify-start mb-7 text-3xl font-bold text-start">Scan Waste</h1>
+            <h1 className=" flex items-start justify-start mb-7 text-3xl font-bold text-start">Dump Waste</h1>
             <div>
                 {loading ? <div className="w-full rounded-lg relative animate-pulse bg-black/80" style={{ height: "400px", borderRadius: "50px" }} /> : <video ref={videoRef} autoPlay muted className=" w-full rounded-lg relative h-96" />}
                 <button onClick={capturePhoto} className=" bg-green-600 w-16 h-16 m-auto rounded-full  flex gap-3 items-center text-center justify-center  text-3xl font-bold text-white mt-7  p-4">
@@ -128,20 +126,12 @@ const Page: React.FC = () => {
                     {aiData && (
                         <div className=" bg-black/5 shadow-lg w-full mt-12 mb-28 rounded-2xl border-2 border-black/10">
                             <div className="flex flex-col gap-4  p-4">
-                                <h1 className="text-2xl uppercase font-bold">Waste Type</h1>
-                                {aiData.type && <h1 className=" text-lg font-bold capitalize">{aiData.type}</h1>}
-                                {aiData && <h1 className=" text-lg font-bold">Recyclable: {aiData.recyclable}</h1>}
-                                {aiData.non_recyclable && <h1 className=" text-lg font-bold">Non Recyclable: {aiData.non_recyclable}</h1>}
-                                {aiData.dry_waste && <h1 className=" text-lg font-bold">Dry Waste: {aiData.dry_waste}</h1>}
-
-                                {aiData.wet_waste && <h1 className=" text-lg font-bold">Wet Waste: {aiData.wet_waste}</h1>}
-                                {aiData.material && <h1 className=" text-lg font-bold capitalize">Material: {aiData.material.replace(/_/g, " ")}</h1>}
-
-                                {demo}
-                                <Link href={`/dump-waste?recycle=${aiData.recyclable > 70 ? true : false}`} className=" flex justify-center items-center gap-3 bg-green-600 text-white p-5 rounded-lg">
-                                    <Trash />
-                                    Dump waste{" "}
-                                </Link>
+                                <h1 className="text-2xl uppercase font-bold">Is Dustbin ? {aiData}</h1>
+                                <h1 className=" text-xl opacity-60 font-bold uppercase">isRecycleItem = {recycle}</h1>
+                                <button className=" flex justify-center items-center gap-3 bg-green-600 text-white p-5 rounded-lg">
+                                    <Coins />
+                                    Claim Rewards{" "}
+                                </button>
                             </div>
                         </div>
                     )}
