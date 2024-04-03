@@ -9,11 +9,11 @@ connect();
 export async function POST(request: NextRequest) {
     try {
         const reqBody = await request.json();
-        const { isRecycleable, wasteNameByAi, wasteType, latitude, longitude, service, discount, CouponCode } = reqBody;
+        const { wastepoints, wasteNameByAi, pointsEarned, isRecyleable, wasteType, latitude, longitude, service, discount, CouponCode } = reqBody;
         const userId = getDataFromJwt(request);
         const user = await User.findOne({ _id: userId }).select("-password");
 
-        if (!(isRecycleable || wasteNameByAi || wasteType || latitude || longitude)) {
+        if (!(pointsEarned || wasteNameByAi || wasteType || latitude || longitude)) {
             return NextResponse.json({ error: "All body params required" });
         }
         if (!user) {
@@ -21,24 +21,20 @@ export async function POST(request: NextRequest) {
         }
         console.log(user);
 
-        if (isRecycleable == "true") {
-            user.totalPointsEarned += 12;
-        } else {
-            user.totalPointsEarned += 5;
-        }
-        user.wasteDumped.push({
+        user.totalPointsEarned += wastepoints;
+        const wasteData = user.wasteDumped.push({
             wasteNameByAi: wasteNameByAi,
             wasteType: wasteType,
-            wastePoints: isRecycleable == "true" ? 12 : 5,
+            wastePoints: wastepoints,
             latitude: latitude,
             longitude: longitude,
-            isRecyleable: isRecycleable == "true" ? true : false,
+            isRecyleable: isRecyleable,
         });
-
+        console.log("Waste Data", wasteData);
         user.coupons.push({
             discount: discount,
             service: service,
-            code: CouponCode, // This should be changed to `code`
+            code: CouponCode,
         });
 
         const data = await user.save();

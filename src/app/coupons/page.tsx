@@ -14,7 +14,6 @@ const Page = () => {
         try {
             const response = await fetch(`/api/auth/profile`);
             const data = await response.json();
-            console.log(data);
             setUserData(data);
             setLoading(false);
             return data;

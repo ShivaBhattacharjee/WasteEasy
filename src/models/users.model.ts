@@ -15,6 +15,7 @@ const wasteDumped = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+
     day: {
         type: Date,
         default: Date.now,

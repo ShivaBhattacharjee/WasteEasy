@@ -189,7 +189,7 @@ const Page = () => {
                     )}
                 </>
             )}
-            <div className={`w-full min-h-screen bg-black/70 absolute top-0 left-0 right-0 z-50 ${openModal ? "scale-100" : "scale-0"} duration-200`}>
+            <div className={`w-full min-h-screen bg-black/70 fixed top-0 left-0 right-0 z-50 ${openModal ? "scale-100" : "scale-0"} duration-200`}>
                 <div className="flex justify-center items-center min-h-screen rounded-lg">
                     <div className=" bg-white rounded-xl w-[90%] h-72 shadow-lg shadow-white/10 overflow-y-scroll ">
                         <div className="flex justify-end items-end p-4">
@@ -208,6 +208,26 @@ const Page = () => {
                                 </p>
                             </div>
                         )}
+                    </div>
+                </div>
+            </div>
+
+            <div className="flex flex-col gap-3 mb-44 ">
+                <div className="flex flex-col ">
+                    <h1 className=" font-semibold  opacity-90 text-green-900 text-2xl tracking-wide">Report an Incident</h1>
+                    <div className="flex flex-col">
+                        <input type="text" placeholder="Enter your email" className=" border-2 border-black/40 p-3 mt-5 rounded-lg bg-transparent" />
+                        <select name="Type Of Incident" className=" border-2 border-black/40 p-3 mt-5 rounded-lg bg-transparent">
+                            <option value="Select Type of Incident">Select Type of Incident</option>
+                            <option value="Overflowing Bins">Overflowing Bins</option>
+                            <option value="Illegal Dumping">Illegal Dumping</option>
+                            <option value="Littering">Littering</option>
+                            <option value="Abandoned Waste">Abandoned Waste</option>
+                            <option value="Unsanitary">Unsanitary</option>
+                            <option value="Waste Spills">Waste Spills</option>
+                        </select>
+                        <textarea name="" placeholder="Enter your issue" className=" border-2 border-black/40 p-3 mt-5 rounded-lg bg-transparent"></textarea>
+                        <button className=" w-full bg-green-600 text-white p-4 rounded-lg mt-5">Report</button>
                     </div>
                 </div>
             </div>

@@ -111,11 +111,13 @@ const Page: React.FC = () => {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    isRecyclable: Boolean(recycle),
+                    isRecyclable: recycle,
                     wasteNameByAi: wasteName,
                     wasteType: wasteType,
                     latitude: latitude!,
                     longitude: longitude!,
+                    isRecyleable: recycle,
+                    wastepoints: recycle == "true" ? 12 : 5,
                     service: coupons[0].service,
                     discount: coupons[0].discount,
                     CouponCode: coupons[0].code,
@@ -223,12 +225,12 @@ const Page: React.FC = () => {
                     {aiData && (
                         <div className="  bg-black/5 shadow-lg w-full mt-12 mb-28 rounded-2xl border-2 border-black/10">
                             <div className="flex flex-col gap-4  p-4">
-                                <h1 className="text-2xl uppercase font-bold">Is Dustbin ? {aiData}</h1>
+                                <h1 className="text-2xl  font-bold">Is Dustbin ? {aiData}</h1>
                                 <h1 className=" text-xl opacity-60 font-bold uppercase">isRecycleItem = {recycle}</h1>
                                 <h1>wasteName : {wasteName}</h1>
                                 <h1>Waste Type {wasteType}</h1>
                                 <h1>Material : {material}</h1>
-                                {!disableClaimBtn && (
+                                {!disableClaimBtn && aiData.trim().toLowerCase() === "yes" && (
                                     <button onClick={claimPointsAndCoupon} className=" flex justify-center items-center gap-3 bg-green-600 text-white p-5 rounded-lg">
                                         <Coins />
                                         Claim Rewards{" "}
