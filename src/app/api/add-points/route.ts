@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
         }
         console.log(user);
 
-        if (isRecycleable === "true") {
+        if (isRecycleable == "true") {
             user.totalPointsEarned += 12;
         } else {
             user.totalPointsEarned += 5;
@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
         user.wasteDumped.push({
             wasteNameByAi: wasteNameByAi,
             wasteType: wasteType,
-            wastePoints: isRecycleable ? 12 : 5,
+            wastePoints: isRecycleable == "true" ? 12 : 5,
             latitude: latitude,
             longitude: longitude,
         });

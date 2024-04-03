@@ -35,14 +35,17 @@ const Page = () => {
                     {user && user.userData.wasteDumped.length > 0 ? (
                         <div>
                             {/* Render user's waste dumped data here */}
-                            {user.userData.wasteDumped.map((dump: any, index: number) => (
-                                <div key={index}>
-                                    <p>Waste Name: {dump.wasteNameByAi}</p>
-                                    <p>Waste Type: {dump.wasteType}</p>
-                                    <p>Waste Points: {dump.wastePoints}</p>
-                                    {/* Add more details as needed */}
-                                </div>
-                            ))}
+                            {user.userData.wasteDumped
+                                .slice()
+                                .reverse()
+                                .map((dump: any, index: number) => (
+                                    <div key={index}>
+                                        <p>Waste Name: {dump.wasteNameByAi}</p>
+                                        <p>Waste Type: {dump.wasteType}</p>
+                                        <p>Waste Points: {dump.wastePoints}</p>
+                                        {/* Add more details as needed */}
+                                    </div>
+                                ))}
                         </div>
                     ) : (
                         <h1>No Waste Dumped</h1>
