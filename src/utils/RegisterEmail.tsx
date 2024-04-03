@@ -28,7 +28,7 @@ export default function RegisterEmail(props: props) {
                     <Body className=" bg-white text-black my-auto mx-auto font-sans">
                         <Container className="border border-solid  border-black/50 rounded my-[40px] mx-auto p-[20px] w-[465px]">
                             <Section className="mt-[32px]">
-                                <Img src={"https://i.pinimg.com/564x/98/bb/b5/98bbb5576013114935c7138a389fe614.jpg"} width="100" height="100" alt="AnimeTrix" className="my-0 mx-auto" />
+                                <Img src={"https://cdn.discordapp.com/attachments/1079039236302446705/1225206462054268938/wastelogo.png?ex=6620496f&is=660dd46f&hm=1a2848f6d8726100d22c2fe9431afee90fd9f621e310f65fc7e61266a2dfb109&"} width="100" height="100" alt="AnimeTrix" className="my-0 mx-auto" />
                             </Section>
                             <Heading className="  text-[24px] font-normal text-center p-0 my-[30px] mx-0">{type == "VERIFY_USER" ? `Welcome to AnimeTrix` : "Password Recovery"}</Heading>
                             <Text className=" text-black text-[14px] leading-[24px]">
