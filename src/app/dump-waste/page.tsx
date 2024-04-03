@@ -44,6 +44,30 @@ const Page: React.FC = () => {
     const [apires, setapires] = useState("");
     const [latitude, setLatitude] = useState<number | null>(null);
     const [longitude, setLongitude] = useState<number | null>(null);
+    const [coupons, setCoupons] = useState<any[]>([]); // Added coupon state
+
+    useEffect(() => {
+        const generateCouponCode = () => {
+            const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            const length = 8;
+            let couponCode = "";
+            for (let i = 0; i < length; i++) {
+                couponCode += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return couponCode;
+        };
+
+        // Generate dummy coupons
+        const services = ["Zomato", "Swiggy", "Uber Eats", "Amazon", "Netflix", "Starbucks", "Gym", "Spa", "Movie Theater", "Bookstore"];
+        const dummyCoupons = Array.from({ length: 200 }, (_, index) => ({
+            id: index + 1,
+            service: services[Math.floor(Math.random() * services.length)],
+            discount: "Buy one, get one free on any item",
+            code: generateCouponCode(),
+        }));
+
+        setCoupons(dummyCoupons);
+    }, []);
 
     const startCamera = async () => {
         try {
@@ -74,7 +98,7 @@ const Page: React.FC = () => {
         }
     };
 
-    const claimPointsAndCupon = async () => {
+    const claimPointsAndCoupon = async () => {
         setClaimRewards(true);
         setDumpLoading(true);
         try {
@@ -84,7 +108,7 @@ const Page: React.FC = () => {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    isRecycleable: Boolean(recycle),
+                    isRecyclable: Boolean(recycle),
                     wasteNameByAi: wasteName,
                     wasteType: wasteType,
                     latitude: latitude!,
@@ -198,7 +222,7 @@ const Page: React.FC = () => {
                                 <h1>wasteName : {wasteName}</h1>
                                 <h1>Waste Type {wasteType}</h1>
                                 <h1>Material : {material}</h1>
-                                <button onClick={claimPointsAndCupon} className=" flex justify-center items-center gap-3 bg-green-600 text-white p-5 rounded-lg">
+                                <button onClick={claimPointsAndCoupon} className=" flex justify-center items-center gap-3 bg-green-600 text-white p-5 rounded-lg">
                                     <Coins />
                                     Claim Rewards{" "}
                                 </button>
@@ -215,10 +239,21 @@ const Page: React.FC = () => {
                                         <>
                                             <div className="flex flex-col text-center text-white font-bold text-lg">
                                                 <h1>{recycle == "true" ? "Points earned 12" : "points earned 5"}</h1>
+                                                <h2>Coupons:</h2>
+                                                <ul>
+                                                    {coupons.slice(0, 2).map((coupon, index) => (
+                                                        <li key={index}>
+                                                            <span>Service: {coupon.service}</span>
+                                                            <br />
+                                                            <span>Discount: {coupon.discount}</span>
+                                                            <br />
+                                                            <span>Coupon Code: {coupon.code}</span>
+                                                        </li>
+                                                    ))}
+                                                </ul>
                                             </div>
 
-                                            <h1 className=" text-3xl font-bold text-center">Copoun Recieved : {recycle ? 12 : 5}</h1>
-                                            {JSON.stringify(apires)}
+                                            <h1 className=" text-3xl font-bold text-center">Coupon Received</h1>
                                         </>
                                     )}
                                 </div>

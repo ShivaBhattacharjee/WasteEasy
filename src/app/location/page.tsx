@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
+import { GoogleMap, Marker, InfoWindow, useJsApiLoader } from "@react-google-maps/api";
 
 const containerStyle = {
     width: "100%",
@@ -14,6 +14,8 @@ const GoogleMapsComponent: React.FC = () => {
 
     const [map, setMap] = useState<google.maps.Map | null>(null);
     const [userLocation, setUserLocation] = useState<google.maps.LatLngLiteral | null>(null);
+    const [wasteDumpLocations, setWasteDumpLocations] = useState<any[]>([]);
+    const [selectedMarker, setSelectedMarker] = useState<any | null>(null);
 
     useEffect(() => {
         if (!isLoaded) return;
@@ -31,13 +33,52 @@ const GoogleMapsComponent: React.FC = () => {
         } else {
             console.error("Geolocation is not supported by your browser.");
         }
+
+        // Fetch waste dump locations
+        fetch("/api/auth/profile")
+            .then((response) => response.json())
+            .then((data) => {
+                if (data && data.userData && data.userData.wasteDumped) {
+                    setWasteDumpLocations(data.userData.wasteDumped);
+                }
+            })
+            .catch((error) => {
+                console.error("Error fetching waste dump locations:", error);
+            });
     }, [isLoaded]);
+
+    const handleMarkerClick = (marker: any) => {
+        setSelectedMarker(marker);
+    };
+
+    const handleCloseInfoWindow = () => {
+        setSelectedMarker(null);
+    };
 
     return (
         <div>
             {isLoaded && (
                 <GoogleMap mapContainerStyle={containerStyle} center={userLocation || { lat: 0, lng: 0 }} zoom={userLocation ? 12 : 3} onLoad={(map) => setMap(map)}>
                     {userLocation && <Marker position={userLocation} />}
+                    {wasteDumpLocations.map((dump, index) => (
+                        <Marker key={index} position={{ lat: dump.latitude, lng: dump.longitude }} onClick={() => handleMarkerClick(dump)}>
+                            {selectedMarker === dump && (
+                                <InfoWindow onCloseClick={handleCloseInfoWindow}>
+                                    <div>
+                                        <h2>Waste Dump Location</h2>
+                                        <p>Latitude: {dump.latitude}</p>
+                                        <p>Longitude: {dump.longitude}</p>
+                                        <p>
+                                            <a href={`https://www.google.com/maps/search/?api=1&query=${dump.latitude},${dump.longitude}`} target="_blank" rel="noopener noreferrer">
+                                                View in Google Maps
+                                            </a>
+                                        </p>
+                                        {/* Add more options as needed */}
+                                    </div>
+                                </InfoWindow>
+                            )}
+                        </Marker>
+                    ))}
                 </GoogleMap>
             )}
         </div>
