@@ -58,7 +58,7 @@ const GoogleMapsComponent: React.FC = () => {
     return (
         <div>
             {isLoaded && (
-                <GoogleMap mapContainerStyle={containerStyle} center={userLocation || { lat: 0, lng: 0 }} zoom={userLocation ? 12 : 3} onLoad={(map) => setMap(map)}>
+                <GoogleMap mapContainerStyle={containerStyle} center={userLocation || { lat: 0, lng: 0 }} zoom={userLocation ? 16 : 3} onLoad={(map) => setMap(map)}>
                     {wasteDumpLocations.map((dump, index) => (
                         <Marker key={index} position={{ lat: dump.latitude, lng: dump.longitude }} onClick={() => handleMarkerClick(dump)}>
                             {selectedMarker === dump && (
