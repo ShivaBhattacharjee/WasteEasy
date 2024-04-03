@@ -64,7 +64,7 @@ const Page = () => {
     }, 800);
     return (
         <>
-            {!token ? (
+            {token ? (
                 <section className="flex min-h-[90vh] justify-center items-center">
                     <div className="  shadow-md shadow-black/10 border-2 border-black/10 w-full m-4 md:m-auto p-4 rounded-lg">
                         <h1 className="font-semibold text-2xl text-center mb-5">Reset Password</h1>
