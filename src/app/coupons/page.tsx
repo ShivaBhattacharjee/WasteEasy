@@ -3,6 +3,9 @@ import SpinLoading from "@/components/loading/SpinLoading";
 import React, { useEffect, useState } from "react";
 import logo from "@/assets/logo.png";
 import Image from "next/image";
+import banner from "@/assets/banner.jpeg";
+import { Lato } from "next/font/google";
+const lato = Lato({ weight: "400", subsets: ["latin"] });
 const Page = () => {
     const [user, setUserData] = useState<any>(null);
     const [loading, setLoading] = useState<boolean>(true);
@@ -28,7 +31,7 @@ const Page = () => {
 
     return (
         <div>
-            <h1 className=" text-3xl font-bold uppercase mt-7">Coupons</h1>
+            <h1 className={`text-3xl ${lato.className} font-bold uppercase mt-7`}>Coupons</h1>
             {loading ? (
                 <div className="flex justify-center items-center min-h-screen">
                     <SpinLoading />
@@ -37,18 +40,27 @@ const Page = () => {
                 <div>
                     {user.userData && user.userData.coupons && user.userData.coupons.length > 0 ? (
                         <div className="grid grid-cols-2 gap-3 mt-12">
-                            {user.userData.coupons.map((coupon: any, index: number) => (
-                                <div key={index}>
-                                    <div className="flex bg-white/80 border-2 h-40  border-black/40 shadow-lg w-full rounded-lg">
-                                        <div className="flex flex-col p-4 w-full h-full">
-                                            <Image src={logo} height={40} width={50} alt="logo" />
-                                            <div className="w-full h-[2px] bg-black/40"></div>
-                                            <div className="text-xl font-bold  capitalize opacity-80 ">{coupon.service}</div>
-                                            <div className=" p-2 text-lg text-center  bg-black/10 rounded-lg"> {coupon.code || "Invalid"}</div>
+                            {user.userData.coupons
+                                .slice()
+                                .reverse()
+                                .map((coupon: any, index: number) => (
+                                    <div key={index}>
+                                        <div className="flex bg-white/80 border-2  border-black/40 shadow-lg w-full rounded-lg">
+                                            <div className=" relative">
+                                                <Image src={banner} height={200} width={300} alt="banner" className="  brightness-75" />
+                                                <div className="bg-white mt-2 rounded-full w-12 border-2 border-black/90 absolute top-14 z-10 h-12 ml-2 p-2">
+                                                    <Image src={logo} className="" height={180} width={180} alt="logo" />
+                                                </div>
+
+                                                <div className="flex flex-col p-4 w-full h-full">
+                                                    <div className="text-xl font-bold  capitalize opacity-80 ">{coupon.service}</div>
+                                                    <div className=" opacity-80 text-sm mb-3">{coupon.discount || "discount"}</div>
+                                                    <div className=" p-2 text-lg text-center  bg-black/10 rounded-lg"> {coupon.code || "Invalid"}</div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            ))}
+                                ))}
                         </div>
                     ) : (
                         <div className="flex justify-center items-center text-3xl font-bold min-h-screen">No coupons available</div>

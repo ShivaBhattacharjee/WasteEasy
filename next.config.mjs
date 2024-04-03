@@ -1,4 +1,21 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {};
+import withPWAInit from "next-pwa";
+const withPWA = withPWAInit({
+    dest: 'public'
+})
 
-export default nextConfig;
+
+export default withPWA({
+    pwa: {
+        dest: 'public',
+        register: true,
+        skipWaiting: true,
+    },
+    images: {
+        remotePatterns: [
+            {
+                protocol: "https",
+                hostname: "**",
+            },
+        ],
+    },
+})

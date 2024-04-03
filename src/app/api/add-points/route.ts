@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
         user.coupons.push({
             discount: discount,
             service: service,
-            CouponCode: CouponCode, // This should be changed to `code`
+            code: CouponCode, // This should be changed to `code`
         });
 
         const data = await user.save();

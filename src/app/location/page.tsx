@@ -4,10 +4,14 @@ import { GoogleMap, Marker, InfoWindow, useJsApiLoader } from "@react-google-map
 
 const containerStyle = {
     width: "100%",
-    height: "80vh",
+    height: "76vh",
     borderRadius: "20px",
     boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)", // Added box shadow
 };
+
+import { Lato } from "next/font/google";
+import SpinLoading from "@/components/loading/SpinLoading";
+const lato = Lato({ weight: "400", subsets: ["latin"] });
 
 const GoogleMapsComponent: React.FC = () => {
     const { isLoaded } = useJsApiLoader({
@@ -58,9 +62,9 @@ const GoogleMapsComponent: React.FC = () => {
     };
 
     return (
-        <div>
-            <h1 className="p-4 text-3xl font-bold uppercase">Bin Station</h1>
-            {isLoaded && (
+        <div className={`${lato.className}`}>
+            <h1 className={`text-3xl uppercase mt-5 mb-5 font-semibold`}>Bin Station</h1>
+            {isLoaded ? (
                 <GoogleMap mapContainerStyle={containerStyle} center={userLocation || { lat: 0, lng: 0 }} zoom={userLocation ? 16 : 3} onLoad={(map) => setMap(map)}>
                     {wasteDumpLocations.map((dump, index) => (
                         <Marker key={index} position={{ lat: dump.latitude, lng: dump.longitude }} onClick={() => handleMarkerClick(dump)}>
@@ -82,6 +86,10 @@ const GoogleMapsComponent: React.FC = () => {
                         </Marker>
                     ))}
                 </GoogleMap>
+            ) : (
+                <div className="flex justify-center items-center min-h-screen">
+                    <SpinLoading />
+                </div>
             )}
         </div>
     );

@@ -43,6 +43,7 @@ const Page = () => {
                                         <p>Waste Name: {dump.wasteNameByAi}</p>
                                         <p>Waste Type: {dump.wasteType}</p>
                                         <p>Waste Points: {dump.wastePoints}</p>
+                                        <p>IsRecycleable : {dump.isRecyleable ? "True" : "False"}</p>
                                         {/* Add more details as needed */}
                                     </div>
                                 ))}

@@ -4,9 +4,10 @@ import { MoonLoader } from "react-spinners";
 import { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } from "@google/generative-ai";
 import { Coins, Scan, X } from "lucide-react";
 import { useSearchParams } from "next/navigation";
-
 import SpinLoading from "@/components/loading/SpinLoading";
 import Toast from "@/utils/toast";
+import badge from "@/assets/badge.jpg";
+import Image from "next/image";
 
 const safetySettings = [
     {
@@ -234,33 +235,28 @@ const Page: React.FC = () => {
                                     </button>
                                 )}
 
-                                <div className={`absolute bg-green-500 z-50 w-[90%] m-auto right-0 left-0 h-96 rounded-lg top-16 ${claimRewards ? "scale-100" : "scale-0"} duration-200`}>
+                                <div className={`absolute bg-white shadow-md shadow-black/10 border-2  border-black/10 z-50 w-[90%] m-auto right-0 left-0 h-96 rounded-lg top-16 ${claimRewards ? "scale-100" : "scale-0"} duration-200`}>
                                     <div className="flex p-4 text-white justify-end items-end">
-                                        <X size={40} onClick={() => setClaimRewards(false)} />
+                                        <X size={40} onClick={() => setClaimRewards(false)} className=" text-green-500" />
                                     </div>
                                     {dumpLoading ? (
                                         <div className="flex h-full justify-center items-center">
                                             <SpinLoading />
                                         </div>
                                     ) : (
-                                        <>
-                                            <h1 className=" text-3xl font-bold text-center">Coupon Received</h1>
-                                            <div className="flex flex-col text-center text-white font-bold text-lg">
-                                                <h1>{recycle == "true" ? "Points earned 12" : "points earned 5"}</h1>
-                                                <h2>Coupons:</h2>
-                                                <ul>
-                                                    {coupons.slice(0, 2).map((coupon, index) => (
-                                                        <li key={index}>
-                                                            <span>Service: {coupon.service}</span>
-                                                            <br />
-                                                            <span>Discount: {coupon.discount}</span>
-                                                            <br />
-                                                            <span>Coupon Code: {coupon.code}</span>
-                                                        </li>
-                                                    ))}
-                                                </ul>
+                                        <div className="flex justify-center items-center  flex-col">
+                                            <Image src={badge} alt="bade" width={100} height={10} className=" w-32 h-32" />
+                                            <h1 className=" text-2xl font-bold capitalize">Congratulations</h1>
+                                            <h1 className=" text-3xl font-bold">You won: </h1>
+                                            <div className="flex flex-col">
+                                                {coupons.slice(0, 2).map((coupon, index) => (
+                                                    <div className="flex flex-col   justify-center items-center w-full" key={index}>
+                                                        <span className=" text-xl font-bold"> {coupon.service}</span>
+                                                        <span className=" bg-black/40 p-4 text-white w-full text-sm rounded-xl"> {coupon.code}</span>
+                                                    </div>
+                                                ))}
                                             </div>
-                                        </>
+                                        </div>
                                     )}
                                 </div>
                             </div>
