@@ -9,7 +9,7 @@ connect();
 export async function POST(request: NextRequest) {
     try {
         const reqBody = await request.json();
-        const { isRecycleable, wasteNameByAi, wasteType, latitude, longitude } = reqBody;
+        const { isRecycleable, wasteNameByAi, wasteType, latitude, longitude, service, discount, CouponCode } = reqBody;
         const userId = getDataFromJwt(request);
         const user = await User.findOne({ _id: userId }).select("-password");
 
@@ -32,6 +32,12 @@ export async function POST(request: NextRequest) {
             wastePoints: isRecycleable == "true" ? 12 : 5,
             latitude: latitude,
             longitude: longitude,
+        });
+
+        user.coupons.push({
+            discount: discount,
+            service: service,
+            CouponCode: CouponCode,
         });
 
         const data = await user.save();

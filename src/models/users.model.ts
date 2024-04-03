@@ -26,15 +26,16 @@ const wasteDumped = new mongoose.Schema({
         type: Number,
     },
 });
+const couponSchema = new mongoose.Schema({
+    service: String,
+    discount: String,
+    code: String,
+    expiryDate: Date,
+});
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
         required: [true, "Please provide a username"],
-        unique: true,
-    },
-    phoneNumber: {
-        type: String,
-        required: [true, "Please provide a phone number"],
         unique: true,
     },
     email: {
@@ -76,6 +77,10 @@ const userSchema = new mongoose.Schema({
     },
     wasteDumped: {
         type: [wasteDumped],
+        default: [],
+    },
+    coupons: {
+        type: [couponSchema],
         default: [],
     },
     forgotPasswordToken: String,

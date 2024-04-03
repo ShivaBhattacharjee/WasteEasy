@@ -66,7 +66,7 @@ const Page: React.FC = () => {
             code: generateCouponCode(),
         }));
 
-        setCoupons(dummyCoupons);
+        setCoupons(dummyCoupons.slice(0, 1));
     }, []);
 
     const startCamera = async () => {
@@ -113,6 +113,8 @@ const Page: React.FC = () => {
                     wasteType: wasteType,
                     latitude: latitude!,
                     longitude: longitude!,
+                    service: coupons[0].service,
+                    discount: coupons[0].discount,
                 }),
             });
 
@@ -227,7 +229,7 @@ const Page: React.FC = () => {
                                     Claim Rewards{" "}
                                 </button>
 
-                                <div className={`absolute bg-green-500 w-[90%] m-auto right-0 left-0 h-96 rounded-lg top-16 ${claimRewards ? "scale-100" : "scale-0"} duration-200`}>
+                                <div className={`absolute bg-green-500 z-50 w-[90%] m-auto right-0 left-0 h-96 rounded-lg top-16 ${claimRewards ? "scale-100" : "scale-0"} duration-200`}>
                                     <div className="flex p-4 text-white justify-end items-end">
                                         <X size={40} onClick={() => setClaimRewards(false)} />
                                     </div>
@@ -237,6 +239,7 @@ const Page: React.FC = () => {
                                         </div>
                                     ) : (
                                         <>
+                                            <h1 className=" text-3xl font-bold text-center">Coupon Received</h1>
                                             <div className="flex flex-col text-center text-white font-bold text-lg">
                                                 <h1>{recycle == "true" ? "Points earned 12" : "points earned 5"}</h1>
                                                 <h2>Coupons:</h2>
@@ -252,8 +255,6 @@ const Page: React.FC = () => {
                                                     ))}
                                                 </ul>
                                             </div>
-
-                                            <h1 className=" text-3xl font-bold text-center">Coupon Received</h1>
                                         </>
                                     )}
                                 </div>

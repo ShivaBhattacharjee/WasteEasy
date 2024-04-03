@@ -25,8 +25,8 @@ export const sendEmail = async ({ email, emailType, userId }: EmailProps) => {
             host: "smtp.ethereal.email",
             port: 587,
             auth: {
-                user: "tina2@ethereal.email",
-                pass: "yAHzRrt5QKeFPmm5ZV",
+                user: "charles.abernathy21@ethereal.email",
+                pass: "qcUVDQKp8d4Q4g2kwf",
             },
         });
         // used to send email using nodemailer only for production
