@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Bell, CircleCheck, CircleX, Cloud, History, Landmark, Recycle, X } from "lucide-react";
+import { Bell, CircleCheck, CircleX, Cloud, History, Landmark, MailPlus, Recycle, X } from "lucide-react";
 import SpinLoading from "@/components/loading/SpinLoading";
 import Image from "next/image";
 
@@ -9,6 +9,7 @@ import paper from "@/assets/paper.jpg";
 import metal from "@/assets/aluminium.jpg";
 import glass from "@/assets/glass.jpg";
 import Link from "next/link";
+import Contact from "@/components/contact";
 
 export interface ApiResponse {
     message: string;
@@ -211,26 +212,7 @@ const Page = () => {
                     </div>
                 </div>
             </div>
-
-            <div className="flex flex-col gap-3 mb-44 ">
-                <div className="flex flex-col ">
-                    <h1 className=" font-semibold  opacity-90 text-green-900 text-2xl tracking-wide">Report an Incident</h1>
-                    <div className="flex flex-col">
-                        <input type="text" placeholder="Enter your email" className=" border-2 border-black/40 p-3 mt-5 rounded-lg bg-transparent" />
-                        <select name="Type Of Incident" className=" border-2 border-black/40 p-3 mt-5 rounded-lg bg-transparent">
-                            <option value="Select Type of Incident">Select Type of Incident</option>
-                            <option value="Overflowing Bins">Overflowing Bins</option>
-                            <option value="Illegal Dumping">Illegal Dumping</option>
-                            <option value="Littering">Littering</option>
-                            <option value="Abandoned Waste">Abandoned Waste</option>
-                            <option value="Unsanitary">Unsanitary</option>
-                            <option value="Waste Spills">Waste Spills</option>
-                        </select>
-                        <textarea name="" placeholder="Enter your issue" className=" border-2 border-black/40 p-3 mt-5 rounded-lg bg-transparent"></textarea>
-                        <button className=" w-full bg-green-600 text-white p-4 rounded-lg mt-5">Report</button>
-                    </div>
-                </div>
-            </div>
+            <Contact />
         </section>
     );
 };

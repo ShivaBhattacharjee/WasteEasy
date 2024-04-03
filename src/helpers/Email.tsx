@@ -21,22 +21,22 @@ export const sendEmail = async ({ email, emailType, userId }: EmailProps) => {
         }
 
         // use ethereal for testing
-        const transport = nodemailer.createTransport({
-            host: "smtp.ethereal.email",
-            port: 587,
-            auth: {
-                user: "charles.abernathy21@ethereal.email",
-                pass: "qcUVDQKp8d4Q4g2kwf",
-            },
-        });
-        // used to send email using nodemailer only for production
         // const transport = nodemailer.createTransport({
-        //     service: process.env.NEXT_PUBLIC_EMAIL_SERVICE,
+        //     host: "smtp.ethereal.email",
+        //     port: 587,
         //     auth: {
-        //         user: process.env.NEXT_PUBLIC_EMAIL,
-        //         pass: process.env.NEXT_PUBLIC_EMAIL_PASSWORD,
+        //         user: "charles.abernathy21@ethereal.email",
+        //         pass: "qcUVDQKp8d4Q4g2kwf",
         //     },
         // });
+        // used to send email using nodemailer only for production
+        const transport = nodemailer.createTransport({
+            service: process.env.NEXT_PUBLIC_EMAIL_SERVICE,
+            auth: {
+                user: process.env.NEXT_PUBLIC_EMAIL,
+                pass: process.env.NEXT_PUBLIC_EMAIL_PASSWORD,
+            },
+        });
 
         const registerEmail = render(<RegisterEmail username={email} type={emailType} VerifyLink={`${process.env.NEXT_PUBLIC_DOMAIN}/${emailType == "VERIFY_USER" ? "verify-register" : "verify-forgot-password"}?token=${cleanedHashedToken}`} />);
         const mailOptions = {
