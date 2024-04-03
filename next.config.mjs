@@ -17,5 +17,8 @@ export default withPWA({
                 hostname: "**",
             },
         ],
-    },
+    }, experimental: {
+        optimizeFonts: true,
+        missingSuspenseWithCSRBailout: false,
+    }
 })

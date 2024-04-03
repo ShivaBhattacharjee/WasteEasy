@@ -9,13 +9,13 @@
     "description": "Waste-ease for Simplified your Waste Management",
     "icons": [
         {
-            "src": "wastelogo.png",
+            "src": "/wastelogo.png",
             "sizes": "192x192",
             "type": "image/png",
             "purpose": "any maskable"
         },
         {
-            "src": "wastelogo.png",
+            "src": "/wastelogo.png",
             "sizes": "256x256",
             "type": "image/png",
             "purpose": "maskable"
@@ -27,7 +27,7 @@
             "purpose": "maskable"
         },
         {
-            "src": "wastelogo.png",
+            "src": "/wastelogo.png",
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "maskable"

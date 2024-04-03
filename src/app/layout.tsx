@@ -10,6 +10,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
     title: "Waste-ease",
+    manifest: "/manifest.json",
+    icons: { apple: "/wastelogo.png" },
     description: "Waste-ease for Simplified your Waste Management",
 };
 
