@@ -1,15 +1,15 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Bell, CircleCheck, CircleX, Cloud, History, Landmark, MailPlus, Recycle, X } from "lucide-react";
-import SpinLoading from "@/components/loading/SpinLoading";
+import { Bell, CircleCheck, CircleX, Cloud, History, Landmark, Recycle, X } from "lucide-react";
 import Image from "next/image";
-
-import bottle from "@/assets/bottle.jpg";
-import paper from "@/assets/paper.jpg";
-import metal from "@/assets/aluminium.jpg";
-import glass from "@/assets/glass.jpg";
 import Link from "next/link";
+
+import metal from "@/assets/aluminium.jpg";
+import bottle from "@/assets/bottle.jpg";
+import glass from "@/assets/glass.jpg";
+import paper from "@/assets/paper.jpg";
 import Contact from "@/components/contact";
+import SpinLoading from "@/components/loading/SpinLoading";
 
 export interface ApiResponse {
     message: string;

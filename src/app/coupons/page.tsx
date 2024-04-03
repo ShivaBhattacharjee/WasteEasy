@@ -1,10 +1,11 @@
 "use client";
-import SpinLoading from "@/components/loading/SpinLoading";
 import React, { useEffect, useState } from "react";
-import logo from "@/assets/logo.png";
-import Image from "next/image";
-import banner from "@/assets/banner.jpeg";
 import { Lato } from "next/font/google";
+import Image from "next/image";
+
+import banner from "@/assets/banner.jpeg";
+import logo from "@/assets/logo.png";
+import SpinLoading from "@/components/loading/SpinLoading";
 const lato = Lato({ weight: "400", subsets: ["latin"] });
 const Page = () => {
     const [user, setUserData] = useState<any>(null);

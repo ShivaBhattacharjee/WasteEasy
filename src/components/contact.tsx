@@ -2,7 +2,8 @@
 import React, { useRef, useState } from "react";
 import { ScaleLoader } from "react-spinners";
 import emailjs from "@emailjs/browser";
-import { MailPlus, Nfc } from "lucide-react";
+import { MailPlus } from "lucide-react";
+
 import Toast from "@/utils/toast";
 
 const Contact = () => {
@@ -52,7 +53,7 @@ const Contact = () => {
                         </button>
                     ) : (
                         <button className="flex justify-center items-center gap-3 bg-green-600 text-white rounded-lg p-4">
-                            <Nfc />
+                            <MailPlus />
                             Report
                         </button>
                     )}

@@ -3,11 +3,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { MoonLoader } from "react-spinners";
 import { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } from "@google/generative-ai";
 import { Coins, Scan, X } from "lucide-react";
+import Image from "next/image";
 import { useSearchParams } from "next/navigation";
+
+import badge from "@/assets/badge.jpg";
 import SpinLoading from "@/components/loading/SpinLoading";
 import Toast from "@/utils/toast";
-import badge from "@/assets/badge.jpg";
-import Image from "next/image";
 
 const safetySettings = [
     {
@@ -42,7 +43,6 @@ const Page: React.FC = () => {
     const [claimRewards, setClaimRewards] = useState<boolean>(false);
     const [disableCapture, setDisableCapture] = useState<boolean>(false);
     const [dumpLoading, setDumpLoading] = useState<boolean>(false);
-    const [apires, setapires] = useState("");
     const [latitude, setLatitude] = useState<number | null>(null);
     const [longitude, setLongitude] = useState<number | null>(null);
     const [coupons, setCoupons] = useState<any[]>([]); // Added coupon state
@@ -128,7 +128,6 @@ const Page: React.FC = () => {
                 const data = await res.json();
                 Toast.SuccessshowToast(`${recycle == "true" ? 12 : 5} Points credited `);
                 setDumpLoading(false);
-                setapires(data);
                 console.log(data);
             } else {
                 const data = await res.json();

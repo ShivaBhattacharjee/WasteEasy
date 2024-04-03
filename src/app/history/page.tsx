@@ -1,8 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import { History } from "lucide-react";
 
 import SpinLoading from "@/components/loading/SpinLoading";
-import { History } from "lucide-react";
 
 const Page = () => {
     const [user, setUserData] = useState<any | null>(null);

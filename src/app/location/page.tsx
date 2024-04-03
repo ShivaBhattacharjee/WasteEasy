@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { GoogleMap, Marker, InfoWindow, useJsApiLoader } from "@react-google-maps/api";
+import { GoogleMap, InfoWindow, Marker, useJsApiLoader } from "@react-google-maps/api";
 
 const containerStyle = {
     width: "100%",
@@ -10,6 +10,7 @@ const containerStyle = {
 };
 
 import { Lato } from "next/font/google";
+
 import SpinLoading from "@/components/loading/SpinLoading";
 const lato = Lato({ weight: "400", subsets: ["latin"] });
 
@@ -18,7 +19,6 @@ const GoogleMapsComponent: React.FC = () => {
         googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "",
     });
 
-    const [map, setMap] = useState<google.maps.Map | null>(null);
     const [userLocation, setUserLocation] = useState<google.maps.LatLngLiteral | null>(null);
     const [wasteDumpLocations, setWasteDumpLocations] = useState<any[]>([]);
     const [selectedMarker, setSelectedMarker] = useState<any | null>(null);
@@ -65,7 +65,7 @@ const GoogleMapsComponent: React.FC = () => {
         <div className={`${lato.className}`}>
             <h1 className={`text-3xl uppercase mt-5 mb-5 font-semibold`}>Bin Station</h1>
             {isLoaded ? (
-                <GoogleMap mapContainerStyle={containerStyle} center={userLocation || { lat: 0, lng: 0 }} zoom={userLocation ? 16 : 3} onLoad={(map) => setMap(map)}>
+                <GoogleMap mapContainerStyle={containerStyle} center={userLocation || { lat: 0, lng: 0 }} zoom={userLocation ? 16 : 3}>
                     {wasteDumpLocations.map((dump, index) => (
                         <Marker key={index} position={{ lat: dump.latitude, lng: dump.longitude }} onClick={() => handleMarkerClick(dump)}>
                             {selectedMarker === dump && (

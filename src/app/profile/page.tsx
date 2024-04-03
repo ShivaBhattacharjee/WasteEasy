@@ -1,15 +1,15 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Chart, registerables } from "chart.js";
 import { useRouter } from "next/navigation";
-import { Error } from "@/types/ErrorTypes";
-import Toast from "@/utils/toast";
 
 import SpinLoading from "@/components/loading/SpinLoading";
-import { Chart, registerables } from "chart.js";
+import { Error } from "@/types/ErrorTypes";
+import Toast from "@/utils/toast";
 Chart.register(...registerables); // Register necessary controllers
-import { Lato } from "next/font/google";
 import { Cloud, Landmark, LogOut, Recycle } from "lucide-react";
+import { Lato } from "next/font/google";
 const lato = Lato({ weight: "400", subsets: ["latin"] });
 const Page = () => {
     const [user, setUserData] = useState<any>(null);
