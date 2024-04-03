@@ -45,6 +45,7 @@ const Page: React.FC = () => {
     const [latitude, setLatitude] = useState<number | null>(null);
     const [longitude, setLongitude] = useState<number | null>(null);
     const [coupons, setCoupons] = useState<any[]>([]); // Added coupon state
+    const [disableClaimBtn, setdisableClaimBtn] = useState<boolean>(false);
 
     useEffect(() => {
         const generateCouponCode = () => {
@@ -99,6 +100,7 @@ const Page: React.FC = () => {
     };
 
     const claimPointsAndCoupon = async () => {
+        setdisableClaimBtn(true);
         setClaimRewards(true);
         setDumpLoading(true);
         try {
@@ -115,6 +117,7 @@ const Page: React.FC = () => {
                     longitude: longitude!,
                     service: coupons[0].service,
                     discount: coupons[0].discount,
+                    CouponCode: coupons[0].code,
                 }),
             });
 
@@ -224,10 +227,12 @@ const Page: React.FC = () => {
                                 <h1>wasteName : {wasteName}</h1>
                                 <h1>Waste Type {wasteType}</h1>
                                 <h1>Material : {material}</h1>
-                                <button onClick={claimPointsAndCoupon} className=" flex justify-center items-center gap-3 bg-green-600 text-white p-5 rounded-lg">
-                                    <Coins />
-                                    Claim Rewards{" "}
-                                </button>
+                                {!disableClaimBtn && (
+                                    <button onClick={claimPointsAndCoupon} className=" flex justify-center items-center gap-3 bg-green-600 text-white p-5 rounded-lg">
+                                        <Coins />
+                                        Claim Rewards{" "}
+                                    </button>
+                                )}
 
                                 <div className={`absolute bg-green-500 z-50 w-[90%] m-auto right-0 left-0 h-96 rounded-lg top-16 ${claimRewards ? "scale-100" : "scale-0"} duration-200`}>
                                     <div className="flex p-4 text-white justify-end items-end">

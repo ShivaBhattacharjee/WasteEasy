@@ -4,7 +4,9 @@ import { GoogleMap, Marker, InfoWindow, useJsApiLoader } from "@react-google-map
 
 const containerStyle = {
     width: "100%",
-    height: "600px",
+    height: "80vh",
+    borderRadius: "20px",
+    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)", // Added box shadow
 };
 
 const GoogleMapsComponent: React.FC = () => {
@@ -57,6 +59,7 @@ const GoogleMapsComponent: React.FC = () => {
 
     return (
         <div>
+            <h1 className="p-4 text-3xl font-bold uppercase">Bin Station</h1>
             {isLoaded && (
                 <GoogleMap mapContainerStyle={containerStyle} center={userLocation || { lat: 0, lng: 0 }} zoom={userLocation ? 16 : 3} onLoad={(map) => setMap(map)}>
                     {wasteDumpLocations.map((dump, index) => (

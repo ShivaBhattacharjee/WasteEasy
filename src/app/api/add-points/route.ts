@@ -32,12 +32,13 @@ export async function POST(request: NextRequest) {
             wastePoints: isRecycleable == "true" ? 12 : 5,
             latitude: latitude,
             longitude: longitude,
+            isRecyleable: isRecycleable == "true" ? true : false,
         });
 
         user.coupons.push({
             discount: discount,
             service: service,
-            CouponCode: CouponCode,
+            CouponCode: CouponCode, // This should be changed to `code`
         });
 
         const data = await user.save();

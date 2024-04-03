@@ -11,6 +11,10 @@ const wasteDumped = new mongoose.Schema({
         type: Number,
         default: 0,
     },
+    isRecyleable: {
+        type: Boolean,
+        default: false,
+    },
     day: {
         type: Date,
         default: Date.now,
@@ -83,6 +87,7 @@ const userSchema = new mongoose.Schema({
         type: [couponSchema],
         default: [],
     },
+
     forgotPasswordToken: String,
     forgotPasswordTokenExpiry: String,
     verifyToken: String,
