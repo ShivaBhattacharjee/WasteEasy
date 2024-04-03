@@ -5,6 +5,7 @@ import { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } from "@google/ge
 import { Coins, Scan, X } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 
+import SpinLoading from "@/components/loading/SpinLoading";
 import Toast from "@/utils/toast";
 
 const safetySettings = [
@@ -34,8 +35,15 @@ const Page: React.FC = () => {
     const [aiData, setAiData] = useState<any | null>(null);
     const searchParams = useSearchParams();
     const recycle = searchParams.get("recycle");
+    const wasteName = searchParams.get("wasteName");
+    const wasteType = searchParams.get("wasteType");
+    const material = searchParams.get("material");
     const [claimRewards, setClaimRewards] = useState<boolean>(false);
     const [disableCapture, setDisableCapture] = useState<boolean>(false);
+    const [dumpLoading, setDumpLoading] = useState<boolean>(false);
+    const [apires, setapires] = useState("");
+    const [latitude, setLatitude] = useState<number | null>(null);
+    const [longitude, setLongitude] = useState<number | null>(null);
 
     const startCamera = async () => {
         try {
@@ -68,6 +76,7 @@ const Page: React.FC = () => {
 
     const claimPointsAndCupon = async () => {
         setClaimRewards(true);
+        setDumpLoading(true);
         try {
             const res = await fetch("/api/add-points", {
                 method: "POST",
@@ -75,13 +84,19 @@ const Page: React.FC = () => {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    isRecycleable: recycle,
+                    isRecycleable: Boolean(recycle),
+                    wasteNameByAi: wasteName,
+                    wasteType: wasteType,
+                    latitude: latitude!,
+                    longitude: longitude!,
                 }),
             });
 
             if (res.ok) {
                 const data = await res.json();
-                Toast.SuccessshowToast("Points claimed successfully");
+                Toast.SuccessshowToast(`${recycle == "true" ? 12 : 5} Points credited `);
+                setDumpLoading(false);
+                setapires(data);
                 console.log(data);
             } else {
                 const data = await res.json();
@@ -91,6 +106,8 @@ const Page: React.FC = () => {
         } catch (err) {
             Toast.ErrorShowToast("Error claiming points");
             console.error("Error claiming points:", err);
+        } finally {
+            setDumpLoading(false);
         }
     };
 
@@ -135,6 +152,23 @@ const Page: React.FC = () => {
         startCamera();
     }, []);
 
+    useEffect(() => {
+        const getLocation = () => {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    setLatitude(position.coords.latitude);
+                    setLongitude(position.coords.longitude);
+                },
+                (error) => {
+                    console.error("Error getting location:", error);
+                    Toast.ErrorShowToast("Error getting location");
+                },
+            );
+        };
+
+        getLocation();
+    }, []);
+
     return (
         <div className="flex relative flex-col  mt-4 w-full mb-40">
             <h1 className=" flex items-start justify-start mb-7 text-3xl font-bold text-start">Dump Waste</h1>
@@ -161,6 +195,9 @@ const Page: React.FC = () => {
                             <div className="flex flex-col gap-4  p-4">
                                 <h1 className="text-2xl uppercase font-bold">Is Dustbin ? {aiData}</h1>
                                 <h1 className=" text-xl opacity-60 font-bold uppercase">isRecycleItem = {recycle}</h1>
+                                <h1>wasteName : {wasteName}</h1>
+                                <h1>Waste Type {wasteType}</h1>
+                                <h1>Material : {material}</h1>
                                 <button onClick={claimPointsAndCupon} className=" flex justify-center items-center gap-3 bg-green-600 text-white p-5 rounded-lg">
                                     <Coins />
                                     Claim Rewards{" "}
@@ -170,12 +207,20 @@ const Page: React.FC = () => {
                                     <div className="flex p-4 text-white justify-end items-end">
                                         <X size={40} onClick={() => setClaimRewards(false)} />
                                     </div>
+                                    {dumpLoading ? (
+                                        <div className="flex h-full justify-center items-center">
+                                            <SpinLoading />
+                                        </div>
+                                    ) : (
+                                        <>
+                                            <div className="flex flex-col text-center text-white font-bold text-lg">
+                                                <h1>{recycle == "true" ? "Points earned 12" : "points earned 5"}</h1>
+                                            </div>
 
-                                    <div className="flex flex-col text-center text-white font-bold text-lg">
-                                        <h1>{recycle ? "Points earned 12" : "points earned 5"}</h1>
-                                    </div>
-
-                                    <h1 className=" text-3xl font-bold text-center">Copoun Recieved :</h1>
+                                            <h1 className=" text-3xl font-bold text-center">Copoun Recieved : {recycle ? 12 : 5}</h1>
+                                            {JSON.stringify(apires)}
+                                        </>
+                                    )}
                                 </div>
                             </div>
                         </div>

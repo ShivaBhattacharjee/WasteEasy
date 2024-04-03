@@ -66,7 +66,9 @@ const Page = () => {
                                 </Link>
 
                                 <div className="flex gap-3">
-                                    <History size={30} className=" opacity-60" />
+                                    <Link href={"/history"}>
+                                        <History size={30} className=" opacity-60" />
+                                    </Link>
                                     <Bell size={30} className=" opacity-60 relative " onClick={() => setOpenNotification(!openNotification)} />
                                     <div className={` w-44 h-56 z-50 overscroll-y-scroll absolute bg-white ${openNotification ? " scale-100" : "scale-0"} duration-200 rounded-lg top-16 shadow-md shadow-black/40 right-5 border-2 border-black/10`}></div>
                                 </div>

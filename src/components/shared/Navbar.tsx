@@ -26,9 +26,9 @@ const Navbar = () => {
                     <Scan />
                 </Link>
                 <div className="flex gap-12 items-center">
-                    <Link href={"/cupons"} className="flex justify-center gap-1 items-center flex-col">
+                    <Link href={"/coupons"} className="flex justify-center gap-1 items-center flex-col">
                         <Ticket size={32} />
-                        <span className=" text-xs font-medium opacity-70">Cupons</span>
+                        <span className=" text-xs font-medium opacity-70">coupons</span>
                     </Link>
                     <Link href={"/profile"} className="flex justify gap-1 items-center flex-col">
                         <User size={32} />

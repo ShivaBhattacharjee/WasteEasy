@@ -15,6 +15,10 @@ const wasteDumped = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
+    location: {
+        type: String,
+        defeault: "Assam Downtown University, Guwahati, Assam, India",
+    },
     latitude: {
         type: Number,
     },
@@ -56,7 +60,7 @@ const userSchema = new mongoose.Schema({
     },
     userDescription: {
         type: String,
-        default: "Hello there! I'm using AnimeTrix.",
+        default: "Lets join hands to make earth green.",
     },
     city: {
         type: String,
