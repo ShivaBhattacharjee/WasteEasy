@@ -53,7 +53,7 @@ const Page = () => {
                                         <div key={index} className="bg-white/90 p-5 rounded-lg shadow-lg">
                                             <div className="flex justify-between">
                                                 <div>
-                                                    <h1 className="text-xl font-bold">{waste.wasteNameByAi}</h1>
+                                                    <h1 className="text-xl font-bold capitalize">{waste.wasteNameByAi}</h1>
                                                     <p className="text-gray-500">{formatDate(waste.day)}</p>
                                                 </div>
                                                 <div className="flex items-center">

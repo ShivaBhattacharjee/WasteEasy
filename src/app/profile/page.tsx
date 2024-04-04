@@ -8,8 +8,9 @@ import SpinLoading from "@/components/loading/SpinLoading";
 import { Error } from "@/types/ErrorTypes";
 import Toast from "@/utils/toast";
 Chart.register(...registerables); // Register necessary controllers
-import { Cloud, Landmark, LogOut, Recycle } from "lucide-react";
+import { Cloud, Edit, Landmark, LogOut, Recycle } from "lucide-react";
 import { Lato } from "next/font/google";
+import Link from "next/link";
 const lato = Lato({ weight: "400", subsets: ["latin"] });
 const Page = () => {
     const [user, setUserData] = useState<any>(null);
@@ -121,8 +122,13 @@ const Page = () => {
                     <h1 className=" text-4xl font-bold tracking-wide mt-3">Profile</h1>
                     <div className=" bg-green-600 rounded-3xl w-full h-48 mt-12">
                         <div className="flex relative flex-col text-white justify-center items-center h-full">
-                            <img src={user.userData?.profilePicture || "https://i.pinimg.com/564x/58/79/29/5879293da8bd698f308f19b15d3aba9a.jpg"} className=" w-20 h-20 rounded-xl" alt="" />
-                            <h1 className=" text-3xl font-bold tracking-wide capitalize">{user?.userData?.username}</h1>
+                            <div className="flex flex-col gap-2 relative">
+                                <img src={user.userData?.profilePicture || "https://i.pinimg.com/564x/58/79/29/5879293da8bd698f308f19b15d3aba9a.jpg"} className=" w-20 h-20 rounded-xl" alt="" />
+                                <h1 className=" text-3xl font-bold tracking-wide capitalize">{user?.userData?.username}</h1>
+                                <Link href={"/edit-profile"} className="bg-white p-2 rounded-lg bottom-10 right-0 absolute text-black">
+                                    <Edit size={17} />
+                                </Link>
+                            </div>
 
                             <div className="absolute bg-white border-2 border-black/10 text-black shadow-lg shadow-black/10 rounded-lg h-36 top-40 w-[80%] m-auto ">
                                 <div className="flex justify-between items-center h-full">

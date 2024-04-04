@@ -18,7 +18,6 @@ export default withPWA({
             },
         ],
     }, experimental: {
-        optimizeFonts: true,
         missingSuspenseWithCSRBailout: false,
     }
 })
