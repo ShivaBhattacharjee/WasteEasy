@@ -1,5 +1,4 @@
 import React from "react";
-import SpinLoading from "@/components/loading/SpinLoading";
 import { Lato } from "next/font/google";
 const lato = Lato({ weight: "400", subsets: ["latin"] });
 const page = () => {
