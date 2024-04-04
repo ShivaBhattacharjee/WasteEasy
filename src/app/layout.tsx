@@ -25,7 +25,6 @@ export default function RootLayout({
             <body className={`${inter.className} bg-white text-black max-w-[400px] min-h-screen m-auto`}>
                 <Toaster position="top-left" />
                 <NextTopLoader color="#008000" initialPosition={0.08} crawlSpeed={200} height={3} crawl={true} easing="ease" speed={200} zIndex={1600} showAtBottom={false} />
-
                 <Navbar />
                 {children}
             </body>
