@@ -66,7 +66,7 @@ const Page: React.FC = () => {
             setaiLoading(true);
             const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY!);
             const model = genAI.getGenerativeModel({ model: "gemini-pro-vision", safetySettings: safetySettings });
-            const prompt = "Does this look like a recyclable or non recyclable waste to you? Send the % of probability, only with two decimals. Don't send 'yes' or 'no' text, only %. Send both the % of how much it's recyclable and how much it's  also tell the type of waste. like dry waste, wet waste etc. and detect the type of material used in the waste and give a relevant name to the waste too. send response in a json type without ``` or extra anything `` pure keys and values in json ";
+            const prompt = "Does this look like a recyclable or non recyclable waste to you? Send the % of probability, only with two decimals. Don't send 'yes' or 'no' text, only %. Send both the % of how much it's recyclable and how much it's  also tell the type of waste. like dry waste, wet waste etc. and detect the type of material used in the waste and give a relevant name to the waste  and total count of waste too . send response in a json type without ``` or extra anything `` pure keys and values in json ";
             const formatMatch = photoData.match(/^data:(image\/(\w+));base64,/);
             if (!formatMatch) {
                 console.error("Unsupported image format");
@@ -134,12 +134,12 @@ const Page: React.FC = () => {
                                 <h1 className=" text-lg font-bold">Recyclable: {aiData.recyclable || "unknown"}</h1>
                                 <h1 className=" text-lg font-bold">Non Recyclable: {aiData.non_recyclable || "unknown"}</h1>
                                 <h1 className=" text-lg font-bold">Dry Waste: {aiData.dry_waste || "unknown"}</h1>
-
+                                <h1 className=" text-lg font-bold">Total Waste: {aiData.total_count || "0"}</h1>
                                 <h1 className=" text-lg font-bold">Wet Waste: {aiData.wet_waste || 0}</h1>
                                 {aiData.material && <h1 className=" text-lg font-bold capitalize">Material: {aiData.material.replace(/_/g, " ")}</h1>}
 
                                 {demo}
-                                <Link href={`/dump-waste?recycle=${aiData.recyclable > 70 ? true : false}&&wasteName=${aiData.name}&&wasteType=${aiData.type}&&material=${aiData.material}`} className=" flex justify-center items-center gap-3 bg-green-600 text-white p-5 rounded-lg">
+                                <Link href={`/dump-waste?recycle=${aiData.recyclable > 70 ? true : false}&&dryWaste=${aiData.dry_waste > 70 ? true : false}&&wasteName=${aiData.name}&&wasteType=${aiData.type}&&material=${aiData.material}&&totalwaste=${aiData.total_count}`} className=" flex justify-center items-center gap-3 bg-green-600 text-white p-5 rounded-lg">
                                     <Trash />
                                     Dump waste{" "}
                                 </Link>

@@ -40,6 +40,8 @@ const Page: React.FC = () => {
     const wasteName = searchParams.get("wasteName");
     const wasteType = searchParams.get("wasteType");
     const material = searchParams.get("material");
+    const totalwaste = searchParams.get("totalwaste");
+    const dryWaste = searchParams.get("dryWaste");
     const [claimRewards, setClaimRewards] = useState<boolean>(false);
     const [disableCapture, setDisableCapture] = useState<boolean>(false);
     const [dumpLoading, setDumpLoading] = useState<boolean>(false);
@@ -47,6 +49,7 @@ const Page: React.FC = () => {
     const [longitude, setLongitude] = useState<number | null>(null);
     const [coupons, setCoupons] = useState<any[]>([]); // Added coupon state
     const [disableClaimBtn, setdisableClaimBtn] = useState<boolean>(false);
+    const [isDryWaste, setIsDryWaste] = useState<any>("");
 
     useEffect(() => {
         const generateCouponCode = () => {
@@ -147,7 +150,35 @@ const Page: React.FC = () => {
             setaiLoading(true);
             const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY!);
             const model = genAI.getGenerativeModel({ model: "gemini-pro-vision", safetySettings: safetySettings });
-            const prompt = "Does this look like a dustbin to you respond with yes or no";
+            const prompt = "Does this look like a dustbin to you respond with yes or no  ";
+            const formatMatch = photoData.match(/^data:(image\/(\w+));base64,/);
+            if (!formatMatch) {
+                console.error("Unsupported image format");
+                Toast.ErrorShowToast("Unsupported image format");
+                return;
+            }
+
+            const image = {
+                inlineData: {
+                    data: photoData.replace(formatMatch[0], ""),
+                    mimeType: "image/jpeg",
+                },
+            };
+
+            const result = await model.generateContent([prompt, image]);
+            getDustBinType();
+            setAiData(result.response.text());
+        } catch (err) {
+            console.error("Error scanning image:", err);
+            Toast.ErrorShowToast("Error getting dustbin type");
+        }
+    };
+
+    const getDustBinType = async () => {
+        try {
+            const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY!);
+            const model = genAI.getGenerativeModel({ model: "gemini-pro-vision", safetySettings: safetySettings });
+            const prompt = "Does this look like a dry waste dustbin to you respond with true or false  ";
             const formatMatch = photoData.match(/^data:(image\/(\w+));base64,/);
             if (!formatMatch) {
                 console.error("Unsupported image format");
@@ -164,7 +195,7 @@ const Page: React.FC = () => {
 
             const result = await model.generateContent([prompt, image]);
             setaiLoading(false);
-            setAiData(result.response.text());
+            setIsDryWaste(result.response.text());
         } catch (err) {
             console.error("Error scanning image:", err);
             Toast.ErrorShowToast("Error scanning image");
@@ -225,14 +256,22 @@ const Page: React.FC = () => {
                         <div className="  bg-black/5 shadow-lg w-full mt-12 mb-28 rounded-2xl border-2 border-black/10">
                             <div className="flex flex-col gap-4  p-4">
                                 <h1 className="text-2xl  font-bold">Is Dustbin ? {aiData}</h1>
+                                <h1 className=" text-2xl font-bold">IsDry Waste dustbin ? {isDryWaste}</h1>
                                 <h1 className=" text-xl opacity-60 font-bold uppercase">isRecycleItem = {recycle}</h1>
                                 <h1>wasteName : {wasteName}</h1>
                                 <h1>Waste Type {wasteType}</h1>
                                 <h1>Material : {material}</h1>
-                                {!disableClaimBtn && aiData.trim().toLowerCase() === "yes" && (
-                                    <button onClick={claimPointsAndCoupon} className=" flex justify-center items-center gap-3 bg-green-600 text-white p-5 rounded-lg">
+                                <h1>Total Waste : {totalwaste}</h1>
+                                <h1>DryWaste : {dryWaste}</h1>
+                                {aiData.trim().toLowerCase() === "yes" && isDryWaste.trim().toLowerCase() === dryWaste?.trim().toLowerCase() ? (
+                                    <button onClick={claimPointsAndCoupon} className={`flex justify-center items-center gap-3 ${!disableClaimBtn ? "bg-green-600" : "bg-black/40 "}  text-white p-5 rounded-lg`}>
                                         <Coins />
-                                        Claim Rewards{" "}
+                                        {!disableClaimBtn ? "Claim rewards" : "Claimed"}
+                                    </button>
+                                ) : (
+                                    <button className=" flex justify-center items-center gap-3 bg-red-600 text-white p-5 rounded-lg">
+                                        <Coins />
+                                        Wrong dustbin for {dryWaste?.trim().toLowerCase() ? "Dry Waste" : "Wet Waste"}{" "}
                                     </button>
                                 )}
 
