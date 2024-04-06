@@ -18,7 +18,7 @@
   </div>
 
   <p align="center">
-    Waste: An app for waste classification and easy disposal, where users earn coupons by dumping waste.
+     An app for waste classification and easy disposal, where users earn coupons by dumping waste.
     <br/>
     <br/>
     <a href="https://wasteeasy.theshiva.xyz//">View Demo</a>
@@ -78,9 +78,7 @@ WasteEasy is an app designed to streamline waste management. Developed during th
 <a href="https://bun.sh/">Bun</a> is a JavaScript runtime, package manager, test runner bundler built from scratch using the Zig programming language. It was designed by Jarred Sumner as a drop-in replacement for Node.js. Bun uses JavaScriptCore as the JavaScript engine, unlike Node.js and Deno, which both use V8.
 
 <a href="https://www.mongodb.com//">MongoDB</a>  is a source-available, cross-platform, document-oriented database program. Classified as a NoSQL database product, MongoDB utilizes JSON-like documents with optional schemas. MongoDB is developed by MongoDB Inc. and current versions are licensed under the Server Side Public License.
-
-<a href="https://www.docker.com/">Docker</a>Docker is a set of platform as a service products that use OS-level virtualization to deliver software in packages called containers. The service has both free and premium tiers. The software that hosts the containers is called Docker Engine. It was first released in 2013 and is developed by Docker, Inc.
-
+
 <a href="https://developers.google.com/maps/documentation/javascript/get-api-key">GoogleMaps Api key</a>
 
 <a href="https://makersuite.google.com/app/apikey">Gemini Api Key</a> 
