@@ -62,7 +62,6 @@ WasteEasy is an app designed to streamline waste management. Developed during th
 * [Bun](https://bun.sh/)
 * [NextJS](https://nextjs.org)
 * [TailwindCss](https://tailwindcss.com/)
-* [Prisma](https://www.prisma.io/)
 * [MongoDb](https://www.mongodb.com/)
 * [GoogleMaps](https://www.google.com/maps/)
 * [Gemini](https://gemini.google.com/)
