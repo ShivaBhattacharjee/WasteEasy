@@ -80,7 +80,7 @@ const Page = () => {
             chartInstance.destroy(); // Destroy the previous chart instance
         }
 
-        const { recycled, nonRecycled } = calculateWastePercentage();
+        const { recycled, nonRecycled } = calculateWastePercentage() || 0;
 
         const newChartInstance = new Chart(ctx, {
             type: "pie",
@@ -136,7 +136,7 @@ const Page = () => {
                                         <div className="border-2 rounded-full p-4">
                                             <Landmark size={32} />
                                         </div>
-                                        <span className=" font-semibold uppercase text-lg">{user?.userData.totalPointsEarned}</span>
+                                        <span className=" font-semibold uppercase text-lg">{user?.userData.totalPointsEarned || "0"}</span>
                                         <span className="  uppercase text-xs opacity-70 font-semibold tracking-wider">Points</span>
                                     </div>
                                     <div className=" h-16 w-[3px] bg-black/40"></div>
@@ -144,7 +144,7 @@ const Page = () => {
                                         <div className="border-2 rounded-full p-4">
                                             <Cloud size={32} />
                                         </div>
-                                        <span className=" font-semibold uppercase text-lg">{calculateTotalCO2Saved()}G</span>
+                                        <span className=" font-semibold uppercase text-lg">{calculateTotalCO2Saved() || "0"}G</span>
                                         <span className="  uppercase text-xs opacity-70 font-semibold tracking-wider">Saved CO2</span>
                                     </div>
                                     <div className=" h-16 w-[3px] bg-black/40"></div>
@@ -152,7 +152,7 @@ const Page = () => {
                                         <div className="border-2 rounded-full p-4">
                                             <Recycle size={32} />
                                         </div>
-                                        <span className=" font-semibold uppercase text-lg">{user?.userData?.wasteDumped?.length}</span>
+                                        <span className=" font-semibold uppercase text-lg">{user?.userData?.wasteDumped?.length || "0"}</span>
                                         <span className="  uppercase text-xs opacity-70 font-semibold tracking-wider">Recycled</span>
                                     </div>
                                 </div>
