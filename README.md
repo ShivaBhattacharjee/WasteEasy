@@ -58,8 +58,7 @@ WasteEasy is an app designed to streamline waste management. Developed during th
 
 ## Built With
 
-Trim is built using NextJs 
-
+* [NextJs](https://nextjs.org)
 * [Bun](https://bun.sh/)
 * [NextJS](https://nextjs.org)
 * [TailwindCss](https://tailwindcss.com/)
@@ -150,7 +149,7 @@ Wanna contribute to WasteEasy ?
 
 ## Raising an issue
 
-If you're experiencing any problems with Quibble, please be sure to review our [issue template](https://github.com/ShivaBhattacharjee/WasteEasy/tree/main/.github/ISSUE_TEMPLATE) before opening a new issue. The template includes a list of questions and prompts that will help us better understand the issue you're experiencing, and it will ensure that we have all of the necessary information to investigate the problem.
+If you're experiencing any problems with WasteEasy, please be sure to review our [issue template](https://github.com/ShivaBhattacharjee/WasteEasy/tree/main/.github/ISSUE_TEMPLATE) before opening a new issue. The template includes a list of questions and prompts that will help us better understand the issue you're experiencing, and it will ensure that we have all of the necessary information to investigate the problem.
 
 We kindly ask that you provide as much detail as possible when submitting an issue, including steps to reproduce the problem, any error messages that you have seen, and any other relevant information. This will help us to identify and fix the issue more quickly.
 
