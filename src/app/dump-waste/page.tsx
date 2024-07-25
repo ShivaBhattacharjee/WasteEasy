@@ -149,7 +149,7 @@ const Page: React.FC = () => {
         try {
             setaiLoading(true);
             const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY!);
-            const model = genAI.getGenerativeModel({ model: "gemini-pro-vision", safetySettings: safetySettings });
+            const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro", safetySettings: safetySettings });
             const prompt = "Does this look like a dustbin to you respond with yes or no  ";
             const formatMatch = photoData.match(/^data:(image\/(\w+));base64,/);
             if (!formatMatch) {

@@ -65,7 +65,7 @@ const Page: React.FC = () => {
         try {
             setaiLoading(true);
             const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY!);
-            const model = genAI.getGenerativeModel({ model: "gemini-pro-vision", safetySettings: safetySettings });
+            const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro", safetySettings: safetySettings });
             const prompt = "Does this look like a recyclable or non recyclable waste to you? Send the % of probability, only with two decimals. Don't send 'yes' or 'no' text, only %. Send both the % of how much it's recyclable and how much it's  also tell the type of waste. like dry waste, wet waste etc. and detect the type of material used in the waste and give a relevant name to the waste  and total count of waste too . send response in a json type without ``` or extra anything `` pure keys and values in json ";
             const formatMatch = photoData.match(/^data:(image\/(\w+));base64,/);
             if (!formatMatch) {

@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@emailjs/browser": "^4.3.3",
-    "@google/generative-ai": "^0.3.1",
+    "@google/generative-ai": "^0.16.0",
     "@react-google-maps/api": "^2.19.3",
     "@serwist/next": "^9.0.0-preview.21",
     "@serwist/precaching": "^9.0.0-preview.21",
