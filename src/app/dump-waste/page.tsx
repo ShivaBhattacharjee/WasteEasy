@@ -3,10 +3,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { MoonLoader } from "react-spinners";
 import { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } from "@google/generative-ai";
 import { Coins, Scan, X } from "lucide-react";
-import Image from "next/image";
+// import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 
-import badge from "@/assets/badge.jpg";
+// import badge from "@/assets/badge.jpg";
 import SpinLoading from "@/components/loading/SpinLoading";
 import Toast from "@/utils/toast";
 
@@ -285,7 +285,7 @@ const Page: React.FC = () => {
                                         </div>
                                     ) : (
                                         <div className="flex justify-center items-center  flex-col">
-                                            <Image src={badge} alt="bade" width={100} height={10} className=" w-32 h-32" />
+                                            {/* <Image src={badge} alt="bade" width={100} height={10} className=" w-32 h-32" /> */}
                                             <h1 className=" text-2xl font-bold capitalize">Congratulations</h1>
                                             <h1 className=" text-3xl font-bold">You won: </h1>
                                             <div className="flex flex-col">
