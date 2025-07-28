@@ -133,7 +133,7 @@ const Page: React.FC = () => {
                                 <h1 className=" text-lg font-bold capitalize">Waste Type : {aiData.waste_type || "unknown"}</h1>
                                 <h1 className=" text-lg font-bold">Recyclable: {aiData.recyclable_probability || "unknown"}%</h1>
                                 <h1 className=" text-lg font-bold">Non Recyclable: {aiData.non_recyclable_probability || "unknown"}%</h1>
-                                <h1 className=" text-lg font-bold">Total Waste Count: {aiData.waste_count || "0"}</h1>
+                                <h1 className=" text-lg font-bold">Total Waste Count: {aiData.total_count || "0"}</h1>
                                 {aiData.material && <h1 className=" text-lg font-bold capitalize">Material: {aiData.material.replace(/_/g, " ")}</h1>}
 
                                 {demo}
